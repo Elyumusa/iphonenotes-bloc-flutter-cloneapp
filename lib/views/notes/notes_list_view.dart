@@ -5,10 +5,10 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../services/crud/notes_service.dart';
 
-//typedef NoteCallback = void Function(CloudNote note);
-typedef NoteCallBack = void Function(DatabaseNote note);
+typedef NoteCallback = void Function(CloudNote note);
+//typedef NoteCallBack = void Function(DatabaseNote note);
 
-class NotesListView extends StatelessWidget {
+/*class NotesListView extends StatelessWidget {
   final List<DatabaseNote> notes;
   final NoteCallBack onDeleteNote;
   final NoteCallBack onTap;
@@ -65,8 +65,8 @@ class NotesListView extends StatelessWidget {
       },
     );
   }
-}
-/*class NotesListView extends StatelessWidget {
+}*/
+class NotesListView extends StatelessWidget {
   final Iterable<CloudNote> notes;
   final NoteCallback onDeleteNote;
   final NoteCallback onTap;
@@ -84,28 +84,44 @@ class NotesListView extends StatelessWidget {
       itemCount: notes.length,
       itemBuilder: (context, index) {
         final note = notes.elementAt(index);
-        return ListTile(
-          onTap: () {
-            onTap(note);
-          },
-          title: Text(
-            note.text,
-            maxLines: 1,
-            softWrap: true,
-            overflow: TextOverflow.ellipsis,
+        return Dismissible(
+          key: ValueKey(note.hashCode),
+          background: Container(
+            decoration: BoxDecoration(color: Colors.redAccent[100]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.delete),
+              ],
+            ),
           ),
-          trailing: IconButton(
-            onPressed: () async {
-              final shouldDelete = await showDeleteDialog(context);
-              if (shouldDelete) {
-                onDeleteNote(note);
-              }
+          onDismissed: (direction) async {
+            final shouldDelete = await showDeleteDialog(context);
+            if (shouldDelete) {
+              onDeleteNote(note);
+            }
+          },
+          child: ListTile(
+            onTap: () {
+              onTap(note);
             },
-            icon: const Icon(Icons.delete),
+            title: Text(
+              note.text,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+            ),
+            /* trailing: IconButton(
+                onPressed: () async {
+                  final shouldDelete = await showDeleteDialog(context);
+                  if (shouldDelete) {
+                    onDeleteNote(note);
+                  }
+                },
+                icon: Icon(Icons.delete)),*/
           ),
         );
       },
     );
   }
 }
-*/

@@ -8,7 +8,7 @@ import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/services/cloud/firebase_cloud_storage.dart';
 import 'package:share_plus/share_plus.dart';
 
-class CreateUpdateNoteView extends StatefulWidget {
+/*class CreateUpdateNoteView extends StatefulWidget {
   const CreateUpdateNoteView({Key? key}) : super(key: key);
 
   @override
@@ -110,8 +110,8 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       ),
     );
   }
-}
-/*class CreateUpdateNoteView extends StatefulWidget {
+}*/
+class CreateUpdateNoteView extends StatefulWidget {
   const CreateUpdateNoteView({Key? key}) : super(key: key);
 
   @override
@@ -225,8 +225,8 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: InputDecoration(
-                  hintText: context.loc.start_typing_your_note,
-                ),
+                    hintText: "Start typing your note",
+                    border: InputBorder.none),
               );
             default:
               return const CircularProgressIndicator();
@@ -236,4 +236,3 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     );
   }
 }
-*/
