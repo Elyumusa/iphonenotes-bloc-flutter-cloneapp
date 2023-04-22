@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "se.pixolity.mynotes.app-mergeDebugResources-15:/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\O6ert\\Documents\\Flutter Project\\mynotes-course\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "175,807",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "458,973"
+                    },
+                    "to": {
+                        "startLines": "2,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,223",
+                        "endLines": "5,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "218,387"
+                    }
+                }
+            ]
+        }
+    ]
+}

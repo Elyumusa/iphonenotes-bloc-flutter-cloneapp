@@ -1,0 +1,6 @@
+C:\Users\O6ert\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-6.3.2\android\src\main\kotlin\dev\fluttercommunity\plus\share\MethodCallHandler.kt
+C:\Users\O6ert\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-6.3.2\android\src\main\kotlin\dev\fluttercommunity\plus\share\Share.kt
+C:\Users\O6ert\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-6.3.2\android\src\main\kotlin\dev\fluttercommunity\plus\share\ShareFileProvider.kt
+C:\Users\O6ert\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-6.3.2\android\src\main\kotlin\dev\fluttercommunity\plus\share\SharePlusPendingIntent.kt
+C:\Users\O6ert\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-6.3.2\android\src\main\kotlin\dev\fluttercommunity\plus\share\SharePlusPlugin.kt
+C:\Users\O6ert\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-6.3.2\android\src\main\kotlin\dev\fluttercommunity\plus\share\ShareSuccessManager.kt

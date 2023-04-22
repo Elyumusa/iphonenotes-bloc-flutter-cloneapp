@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xxhdpi_splash.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xxhdpi/splash.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-hdpi_launcher_icon.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-hdpi/launcher_icon.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xxhdpi_launcher_icon.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xxhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xxxhdpi_splash.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xxxhdpi/splash.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-mdpi_launcher_icon.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-mdpi/launcher_icon.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xhdpi_launcher_icon.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xxxhdpi_launcher_icon.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xxxhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xhdpi_splash.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xhdpi/splash.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/drawable-v21_launch_background.xml.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/drawable-v21/launch_background.xml"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/drawable_launch_background.xml.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/drawable/launch_background.xml"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-mdpi_splash.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-mdpi/splash.png"
+    },
+    {
+        "merged": "se.pixolity.mynotes.app-merged_res-17:/mipmap-hdpi_splash.png.flat",
+        "source": "se.pixolity.mynotes.app-main-11:/mipmap-hdpi/splash.png"
+    }
+]
