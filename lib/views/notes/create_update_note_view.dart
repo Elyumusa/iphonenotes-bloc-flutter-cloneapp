@@ -90,6 +90,10 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
               return TextField(
                 controller: _textEditingController,
                 keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(
+                    hintText: "Start typing your note",
+                    border: InputBorder.none),
               );
             default:
               return const CircularProgressIndicator();
