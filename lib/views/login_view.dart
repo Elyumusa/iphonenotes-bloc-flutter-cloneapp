@@ -7,6 +7,8 @@ import 'package:mynotes/services/auth/bloc/auth_state.dart';
 import 'package:mynotes/utilities/dialogs/error_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../services/auth/bloc/theme_bloc.dart';
+
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
@@ -114,6 +116,20 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Text(
                     context.loc.login_view_not_registered_yet,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.read<ThemeBloc>().add(
+                          ChangeThemeEvent(
+                              currentTheme: context.read<ThemeBloc>().state ==
+                                      ThemeMode.dark
+                                  ? ThemeMode.light
+                                  : ThemeMode.dark),
+                        );
+                  },
+                  child: Text(
+                    "Change Theme",
                   ),
                 )
               ],

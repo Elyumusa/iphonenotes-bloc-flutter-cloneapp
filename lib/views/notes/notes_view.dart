@@ -12,6 +12,8 @@ import 'package:mynotes/utilities/dialogs/logout_dialog.dart';
 import 'package:mynotes/views/notes/notes_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
 
+import '../../services/auth/bloc/theme_bloc.dart';
+
 extension Count<T extends Iterable> on Stream<T> {
   Stream<int> get getLength => map((event) => event.length);
 }
@@ -36,11 +38,63 @@ class _NotesViewState extends State<NotesView> {
     super.initState();
   }
 
+  Map timeFilters = {
+    "Today": [],
+    "Previous 7 Days": [],
+    "Previous 30 Days": [],
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        color: Colors.transparent,
+        height: 80,
+        child: Row(
+          children: [
+            Spacer(),
+            StreamBuilder(
+              stream: _notesService.allNotes(ownerUserId: userId).getLength,
+              builder: (context, AsyncSnapshot<int> snapshot) {
+                if (snapshot.hasData) {
+                  final noteCount = snapshot.data ?? 0;
+                  final text = context.loc.notes_title(noteCount);
+                  return Text(text);
+                } else {
+                  return const Text('');
+                }
+              },
+            ),
+            Spacer(),
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
+                },
+                icon: const Icon(
+                  Icons.note_add_outlined,
+                ))
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: StreamBuilder(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Row(
+            children: [
+              Icon(
+                Icons.arrow_back_ios,
+                color: Colors.yellowAccent[700],
+                size: 16,
+              ),
+              Text(
+                "Folders",
+                style: TextStyle(color: Colors.yellowAccent[700], fontSize: 12),
+              )
+            ],
+          ),
+        ),
+        /*title: StreamBuilder(
           stream: _notesService.allNotes(ownerUserId: userId).getLength,
           builder: (context, AsyncSnapshot<int> snapshot) {
             if (snapshot.hasData) {
@@ -51,9 +105,9 @@ class _NotesViewState extends State<NotesView> {
               return const Text('');
             }
           },
-        ),
+        ),*/
         actions: [
-          IconButton(
+          /* IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
             },
@@ -80,6 +134,7 @@ class _NotesViewState extends State<NotesView> {
               ];
             },
           )
+        */
         ],
       ),
       body: /*FutureBuilder(
@@ -121,33 +176,155 @@ class _NotesViewState extends State<NotesView> {
           }
         },
       )*/
-          StreamBuilder(
-        stream: _notesService.allNotes(ownerUserId: userId),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.active:
-              if (snapshot.hasData) {
-                final allNotes = snapshot.data as Iterable<CloudNote>;
-                return NotesListView(
-                  notes: allNotes,
-                  onDeleteNote: (note) async {
-                    await _notesService.deleteNote(documentId: note.documentId);
-                  },
-                  onTap: (note) {
-                    Navigator.of(context).pushNamed(
-                      createOrUpdateNoteRoute,
-                      arguments: note,
-                    );
-                  },
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            default:
-              return const CircularProgressIndicator();
-          }
-        },
+          Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Notes",
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.headlineSmall!.color),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 40,
+              width: double.infinity,
+              child: Autocomplete(
+                optionsBuilder: (textEditingValue) {
+                  return [const Iterable.empty()];
+                },
+                onSelected: (option) {},
+                fieldViewBuilder: (context, textEditingController, focusNode,
+                    onFieldSubmitted) {
+                  return TextFormField(
+                      validator: (value) {},
+                      focusNode: focusNode,
+                      controller: textEditingController,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10),
+                          hintStyle: TextStyle(fontSize: 16),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.grey[400],
+                          ),
+                          suffixIcon: Icon(
+                            Icons.keyboard_voice,
+                            color: Colors.grey[500],
+                          ),
+                          hintText: "Search",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide.none),
+                          filled: true,
+                          fillColor:
+                              context.read<ThemeBloc>().state == ThemeMode.light
+                                  ? Colors.grey[200]
+                                  : Colors.grey[800]));
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            StreamBuilder(
+              stream: _notesService.allNotes(ownerUserId: userId),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                  case ConnectionState.active:
+                    if (snapshot.hasData) {
+                      final allNotes = snapshot.data as Iterable<CloudNote>;
+                      allNotes.forEach(
+                        (element) {
+                          if (DateTime.parse(element.date).day ==
+                                  DateTime.now().day &&
+                              DateTime.parse(element.date).month ==
+                                  DateTime.now().month) {
+                            timeFilters['Today'].removeWhere(
+                                (e) => e.documentId == element.documentId);
+                            timeFilters['Today'].add(element);
+                          } else if (DateTime.parse(element.date).day !=
+                                  DateTime.now().day &&
+                              DateTime.parse(element.date).month ==
+                                  DateTime.now().month &&
+                              DateTime.parse(element.date).day >
+                                  DateTime.now()
+                                      .subtract(Duration(days: 7))
+                                      .day) {
+                            timeFilters['Previous 7 Days'].removeWhere(
+                                (e) => e.documentId == element.documentId);
+                            timeFilters['Previous 7 Days'].add(element);
+                          } else if (DateTime.parse(element.date).day !=
+                                  DateTime.now().day &&
+                              DateTime.parse(element.date).month ==
+                                  DateTime.now().month &&
+                              DateTime.parse(element.date).day <
+                                  DateTime.now()
+                                      .subtract(Duration(days: 7))
+                                      .day) {
+                            timeFilters['Previous 30 Days'].removeWhere(
+                                (e) => e.documentId == element.documentId);
+                            timeFilters['Previous 30 Days'].add(element);
+                          }
+                        },
+                      );
+                      return SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...timeFilters.keys.map((e) {
+                              if (timeFilters[e].isNotEmpty) {
+                                print("object: ${timeFilters[e][0].text}");
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      e,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 12,
+                                    ),
+                                    NotesListView(
+                                      notes: timeFilters[e],
+                                      onDeleteNote: (note) async {
+                                        await _notesService.deleteNote(
+                                            documentId: note.documentId);
+                                      },
+                                      onTap: (note) {
+                                        Navigator.of(context).pushNamed(
+                                          createOrUpdateNoteRoute,
+                                          arguments: note,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return SizedBox();
+                              }
+                            })
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  default:
+                    return const CircularProgressIndicator();
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

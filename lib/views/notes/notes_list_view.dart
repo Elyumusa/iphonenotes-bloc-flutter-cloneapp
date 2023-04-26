@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mynotes/services/cloud/cloud_note.dart';
 import 'package:mynotes/utilities/dialogs/delete_dialog.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../services/auth/bloc/theme_bloc.dart';
 import '../../services/crud/notes_service.dart';
 
 typedef NoteCallback = void Function(CloudNote note);
@@ -67,7 +69,7 @@ typedef NoteCallback = void Function(CloudNote note);
   }
 }*/
 class NotesListView extends StatelessWidget {
-  final Iterable<CloudNote> notes;
+  final List notes;
   final NoteCallback onDeleteNote;
   final NoteCallback onTap;
 
@@ -80,28 +82,68 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: notes.length,
-      itemBuilder: (context, index) {
+    return Column(
+        children: List.generate(
+      notes.length,
+      (index) {
         final note = notes.elementAt(index);
         return Dismissible(
-          key: ValueKey(note.hashCode),
-          background: Container(
-            decoration: BoxDecoration(color: Colors.redAccent[100]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(Icons.delete),
-              ],
+            key: ValueKey(note.hashCode),
+            background: Container(
+              decoration: BoxDecoration(color: Colors.redAccent[100]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.delete),
+                ],
+              ),
             ),
-          ),
-          onDismissed: (direction) async {
-            final shouldDelete = await showDeleteDialog(context);
-            if (shouldDelete) {
-              onDeleteNote(note);
-            }
-          },
-          child: ListTile(
+            onDismissed: (direction) async {
+              final shouldDelete = await showDeleteDialog(context);
+              if (shouldDelete) {
+                onDeleteNote(note);
+              }
+            },
+            child: GestureDetector(
+              onTap: () {
+                onTap(note);
+              },
+              child: Container(
+                //height: 100,
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 15),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: context.read<ThemeBloc>().state == ThemeMode.light
+                      ? Colors.white
+                      : Colors.grey[800],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(note.title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      note.text,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(fontSize: 15),
+                    )
+                  ],
+                ),
+              ),
+            ) /*ListTile(
             onTap: () {
               onTap(note);
             },
@@ -119,9 +161,9 @@ class NotesListView extends StatelessWidget {
                   }
                 },
                 icon: Icon(Icons.delete)),*/
-          ),
-        );
+          ),*/
+            );
       },
-    );
+    ));
   }
 }
