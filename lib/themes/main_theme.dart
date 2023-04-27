@@ -17,14 +17,14 @@ class AppTheme {
         toolbarTextStyle: TextStyle(color: Colors.yellowAccent[700]),
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black)),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black)),
     brightness: Brightness.light,
     primaryColor: Colors.white,
     iconTheme: IconThemeData(
       color: Colors.yellowAccent[700],
       size: 32,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
         headlineLarge: TextStyle(color: Colors.black),
         headlineMedium: TextStyle(color: Colors.black),
         headlineSmall: TextStyle(color: Colors.black),
@@ -42,9 +42,9 @@ class AppTheme {
           color: Colors.yellowAccent[700],
           size: 32,
         ),
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.white)),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.white)),
     brightness: Brightness.dark,
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
         headlineLarge: TextStyle(color: Colors.white),
         headlineMedium: TextStyle(color: Colors.white),
         headlineSmall: TextStyle(color: Colors.white),
@@ -53,7 +53,7 @@ class AppTheme {
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(selectedItemColor: Colors.white),
     primaryColor: Colors.black,
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       background: Colors.black,
     ),
     iconTheme: IconThemeData(

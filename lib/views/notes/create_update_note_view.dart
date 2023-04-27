@@ -186,7 +186,9 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   void _saveNoteIfTextNotEmpty() async {
     final note = _note;
     final text = _textController.text;
-    if (note != null && text.isNotEmpty) {
+    if (note != null &&
+        text.isNotEmpty &&
+        titletextController.text.isNotEmpty) {
       await _notesService.updateNote(
         title: titletextController.text,
         documentId: note.documentId,

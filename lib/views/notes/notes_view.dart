@@ -246,7 +246,10 @@ class _NotesViewState extends State<NotesView> {
                                   DateTime.now().month) {
                             timeFilters['Today'].removeWhere(
                                 (e) => e.documentId == element.documentId);
-                            timeFilters['Today'].add(element);
+                            if (element.text.isNotEmpty ||
+                                element.title.isNotEmpty) {
+                              timeFilters['Today'].add(element);
+                            }
                           } else if (DateTime.parse(element.date).day !=
                                   DateTime.now().day &&
                               DateTime.parse(element.date).month ==
@@ -294,6 +297,7 @@ class _NotesViewState extends State<NotesView> {
                                       height: 12,
                                     ),
                                     NotesListView(
+                                      group: e,
                                       notes: timeFilters[e],
                                       onDeleteNote: (note) async {
                                         await _notesService.deleteNote(

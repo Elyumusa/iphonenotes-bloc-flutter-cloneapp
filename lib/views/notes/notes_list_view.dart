@@ -72,11 +72,13 @@ class NotesListView extends StatelessWidget {
   final List notes;
   final NoteCallback onDeleteNote;
   final NoteCallback onTap;
+  final String group;
 
   const NotesListView({
     Key? key,
     required this.notes,
     required this.onDeleteNote,
+    required this.group,
     required this.onTap,
   }) : super(key: key);
 
@@ -131,7 +133,9 @@ class NotesListView extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      note.text,
+                      group != "Today"
+                          ? "${note.date.toString().split("T")[0]}  ${note.text}"
+                          : "${note.text}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
