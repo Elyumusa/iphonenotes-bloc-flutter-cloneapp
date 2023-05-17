@@ -21,6 +21,10 @@ This is a basic clone of the iphone notes app using flutter, SQLlite, firebase a
   **Video Preview:**
   
   
+
+https://github.com/Elyumusa/iphonenotes-bloc-flutter-cloneapp/assets/93226469/8d39288c-b431-48d4-a017-df3a37649191
+
+
   
   ## Screens it contains:
     - Home Page
