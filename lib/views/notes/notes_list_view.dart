@@ -90,7 +90,7 @@ class NotesListView extends StatelessWidget {
       (index) {
         final note = notes.elementAt(index);
         return Dismissible(
-            key: ValueKey(note.hashCode),
+            key: UniqueKey(),
             background: Container(
               decoration: BoxDecoration(color: Colors.redAccent[100]),
               child: Row(

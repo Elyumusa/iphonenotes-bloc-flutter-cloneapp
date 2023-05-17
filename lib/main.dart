@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/helpers/loading/loading_screen.dart';
@@ -19,11 +20,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MainApp extends StatelessWidget {
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +33,55 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc(FirebaseAuthProvider())),
         BlocProvider(create: (context) => ThemeBloc())
       ],
-      child: Builder(builder: (context) {
-        return MaterialApp(
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: context.select((ThemeBloc bloc) => bloc.state),
-          home: const HomePage(),
-          routes: {
-            createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
-          },
-        );
-      }),
+      child: MyApp(),
     );
+  }
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    print("Is it updating");
+    context.read<ThemeBloc>().updateAppTheme();
+    super.didChangePlatformBrightness();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (context) {
+      return MaterialApp(
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: context.select((ThemeBloc bloc) => bloc.state),
+        home: const HomePage(),
+        routes: {
+          createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
+        },
+      );
+    });
   }
 }
 

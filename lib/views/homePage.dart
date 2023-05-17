@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       appBar: AppBar(
-          leading: IconButton(
+          /*leading: IconButton(
               onPressed: () {
                 context.read<ThemeBloc>().add(
                       ChangeThemeEvent(
@@ -69,6 +69,7 @@ class _MainPageState extends State<MainPage> {
                     )
                   : Icon(Icons.dark_mode,
                       size: 32, color: Colors.yellowAccent)),
+         */
           actions: [
             TextButton(
                 onPressed: () {},

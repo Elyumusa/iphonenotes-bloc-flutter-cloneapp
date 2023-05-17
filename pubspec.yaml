@@ -48,7 +48,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
   flutter_launcher_icons: ^0.13.1
-  intl: ^0.17.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

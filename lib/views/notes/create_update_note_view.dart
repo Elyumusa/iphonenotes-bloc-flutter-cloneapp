@@ -157,6 +157,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     final widgetNote = context.getArgument<CloudNote>();
 
     if (widgetNote != null) {
+      print("But bro it's supposed to be null");
       _note = widgetNote;
       _textController.text = widgetNote.text;
       titletextController.text = widgetNote.title;
@@ -174,12 +175,13 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     return newNote;
   }
 
-  void _deleteNoteIfTextIsEmpty() {
+  void _deleteNoteIfTextIsEmpty() async {
+    print("But bro it's supposed to be null");
     final note = _note;
     if (_textController.text.isEmpty &&
         titletextController.text.isEmpty &&
         note != null) {
-      _notesService.deleteNote(documentId: note.documentId);
+      await _notesService.deleteNote(documentId: note.documentId);
     }
   }
 
@@ -225,6 +227,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
         ],
         leading: IconButton(
             onPressed: () {
+              _deleteNoteIfTextIsEmpty();
               Navigator.pop(context);
             },
             icon: Icon(

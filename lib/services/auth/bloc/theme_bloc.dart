@@ -13,14 +13,15 @@ class ThemeBloc extends Bloc<ChangeThemeEvent, ThemeMode> {
   void updateAppTheme() {
     final Brightness currentBrightness = AppTheme.currentSystemBrightness;
     currentBrightness == Brightness.light
-        ? setTheme(ThemeMode.dark)
-        : setTheme(ThemeMode.light);
+        ? setTheme(ThemeMode.light)
+        : setTheme(ThemeMode.dark);
   }
 
   bool currentlyDark = false;
   void setTheme(ThemeMode themeMode) {
     AppTheme.setStatusBarAndNavigationBarColors(themeMode);
-    this.add(ChangeThemeEvent(currentTheme: themeMode));
+    print("set fire: ${themeMode.name}");
+    add(ChangeThemeEvent(currentTheme: themeMode));
   }
 }
 
