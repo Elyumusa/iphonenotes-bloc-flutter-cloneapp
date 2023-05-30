@@ -3,19 +3,19 @@
 This is a basic clone of the iphone notes app using flutter, SQLlite, firebase and the bloc state management.
 
 **Packages in use:**
-  cupertino_icons:
-  firebase_core: 
-  firebase_auth: 
-  cloud_firestore: 
-  sqflite: 
-  path_provider: 
-  path: 
-  share_plus: 
-  bloc: 
-  flutter_bloc: 
-  equatable: 
-  flutter_launcher_icons: 
-  intl:
+  - cupertino_icons:
+  - firebase_core: 
+  - firebase_auth: 
+  - cloud_firestore: 
+  - sqflite: 
+  - path_provider: 
+  - path: 
+  - share_plus: 
+  - bloc: 
+  - flutter_bloc: 
+  - equatable: 
+  - flutter_launcher_icons: 
+  - intl:
   
   
   **Video Preview:**
